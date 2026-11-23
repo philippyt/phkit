@@ -30,7 +30,14 @@ cmd_sync() {
     "$HOME/.agents/skills"
     "$HOME/.claude/skills"
     "$HOME/.codex/skills"
+    "$HOME/.gemini/config/skills"
   )
+
+  if [[ -d "$HOME/.t3/userdata/providers/antigravity" ]]; then
+    for agy_dir in "$HOME/.t3/userdata/providers/antigravity"/*/; do
+      [[ -d "$agy_dir" ]] && skill_roots+=("${agy_dir}config/skills")
+    done
+  fi
 
   for root in "${skill_roots[@]}"; do
     mkdir -p "$root"

@@ -39,11 +39,20 @@ function Invoke-Sync {
         Write-Host "synced AGENTS.md -> $dest"
     }
 
-    $SkillRoots = @(
+    $SkillRoots = [System.Collections.Generic.List[string]]@(
         (Join-Path $HOME ".agents\skills"),
         (Join-Path $HOME ".claude\skills"),
-        (Join-Path $HOME ".codex\skills")
+        (Join-Path $HOME ".codex\skills"),
+        (Join-Path $HOME ".gemini\config\skills")
     )
+
+    # T3 Code isolates Antigravity provider config under ~/.t3/userdata/providers/antigravity/<id>/config/skills
+    $t3AgyBase = Join-Path $HOME ".t3\userdata\providers\antigravity"
+    if (Test-Path $t3AgyBase) {
+        Get-ChildItem -Path $t3AgyBase -Directory | ForEach-Object {
+            $SkillRoots.Add((Join-Path $_.FullName "config\skills"))
+        }
+    }
 
     $skillDirs = Get-ChildItem -Path $SkillsSource -Directory
     foreach ($root in $SkillRoots) {

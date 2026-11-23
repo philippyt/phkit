@@ -6,7 +6,7 @@ personal agent configuration, rules, skills, and project templates for multi-har
 
 - [AGENTS.md](AGENTS.md): global baseline instructions synced across harnesses
 - [templates/](templates/): lean project-level `AGENTS.md` starters (`general`, `ml-research`, `web-backend`, `data-pipeline`, `writing-latex`)
-- [rules/](rules/): opt-in rule blocks (`python`, `rust`, `typescript`, `comments`, `git-manual`, `git-agent`, `logging`)
+- [rules/](rules/): opt-in rule blocks (`python`, `rust`, `typescript`, `comments`, `git-manual`, `git-agent`, `logging`, `tool-design`)
 - [skills/](skills/): `SKILL.md` workflows loaded on demand (`problem-framing`, `distill-judgment`, `eda-workflow`, `experiment-tracking`, `interactive-learning`, `research-agent`)
 - [references/](references/): reference guides and scaffolds (`harness-patterns.md`, `evals.md`, `hooks.md`, `mcp-templates/`)
 - [scripts/](scripts/): `phkit.ps1` (Windows) and `phkit.sh` (macOS/Linux) for syncing global config and bootstrapping projects

@@ -1,66 +1,42 @@
 # phkit
 
-personal agent infrastructure for claude code and llm workflows.
+personal agent configuration, rules, skills, and project templates for multi-harness workflows (T3 Code, Claude Code, Codex, Antigravity, OpenCode).
 
 ## structure
 
-```
-phkit/
-├── claude/
-│   ├── templates/          # CLAUDE.md templates per project type
-│   │   ├── ml-research.md
-│   │   ├── web-backend.md
-│   │   ├── data-pipeline.md
-│   │   ├── writing-latex.md
-│   │   └── general.md
-│   └── rules/              # composable rule blocks
-│       ├── coding-python.md
-│       ├── coding-rust.md
-│       ├── coding-typescript.md
-│       ├── git.md
-│       ├── comments.md
-│       └── logging.md
-├── specs/                  # reusable agent spec files
-│   ├── eda-workflow.md
-│   ├── experiment-tracking.md
-│   ├── interactive-learning.md
-│   └── research-agent.md
-├── harness/                # agent loop patterns (reference, not runnable)
-│   ├── patterns.md
-│   └── checkpointing.md
-├── tools/
-│   └── templates/          # MCP tool scaffolds
-│       ├── mcp-tool-python.py
-│       └── mcp-tool-ts.ts
-└── evals/
-    └── README.md           # how to write evals
+- [AGENTS.md](AGENTS.md) — global baseline instructions synced across harnesses
+- [templates/](templates/) — lean project-level `AGENTS.md` starters (`general`, `ml-research`, `web-backend`, `data-pipeline`, `writing-latex`)
+- [rules/](rules/) — opt-in rule blocks (`python`, `rust`, `typescript`, `comments`, `git-manual`, `git-agent`, `logging`)
+- [skills/](skills/) — `SKILL.md` workflows loaded on demand (`problem-framing`, `distill-judgment`, `eda-workflow`, `experiment-tracking`, `interactive-learning`, `research-agent`)
+- [references/](references/) — reference guides and scaffolds (`harness-patterns.md`, `evals.md`, `hooks.md`, `mcp-templates/`)
+- [scripts/](scripts/) — `phkit.ps1` (Windows) and `phkit.sh` (macOS/Linux) for syncing global config and bootstrapping projects
+
+## usage
+
+### sync global rules and skills
+
+syncs `AGENTS.md` and `skills/` into your local harness directories (`~/.claude`, `~/.codex`, `~/.gemini`, `~/.config/opencode`, `~/.agents/skills`) so new projects in T3 Code and CLI harnesses inherit them automatically.
+
+Windows (PowerShell):
+```powershell
+.\scripts\phkit.ps1 sync
 ```
 
-## how to use
-
-### starting a new project
-
-1. pick the right template from `claude/templates/`
-2. copy it to the root of your new project as `CLAUDE.md`
-3. open that project in claude code
-4. begin with a planning conversation before touching code:
-
-```
-before writing any code, ask me questions to understand the requirements.
-then write spec files into .claude/specs/. one file per concern.
-read CLAUDE.md first.
+macOS / Linux:
+```bash
+./scripts/phkit.sh sync
 ```
 
-### composing rules
+### initialize a project `AGENTS.md`
 
-templates pull from `claude/rules/`. if you need custom behaviour for a
-project, append the relevant rule block to that project's `CLAUDE.md`.
+composes a project template with optional rule blocks into a target directory.
 
-### using specs
+```powershell
+.\scripts\phkit.ps1 init ml-research -Target C:\path\to\project -Rules python,logging
+```
 
-specs in `specs/` are starting points. copy the relevant one into your
-project's `.claude/specs/` folder and edit it for the specific task.
+```bash
+./scripts/phkit.sh init ml-research /path/to/project --rules python,logging
+```
 
-### writing evals
-
-see `evals/README.md`.
+add `-ClaudePointer` (PowerShell) or `--claude-pointer` (bash) to also create a `CLAUDE.md` containing `@AGENTS.md` for tools that look only for `CLAUDE.md`.

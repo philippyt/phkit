@@ -51,7 +51,7 @@ comments explain constraints or non-obvious decisions, never what the code does.
 
 ## git
 
-- commit format: `type: lowercase description` (72 char max, no trailing period). types: `feat`, `fix`, `refactor`, `docs`, `ci`, `test`, `chore`.
+- commit format: `type: lowercase description` (no trailing period). types: `feat`, `fix`, `refactor`, `docs`, `ci`, `test`, `chore`.
 - never force-push, rewrite shared history, or add `Co-Authored-By` trailers.
 - never commit secrets, `.env` files, or local agent metadata unless explicitly tracked.
 - for large diffs, draft the commit message or PR description from the actual diff so the user can review and edit rather than write it from scratch.

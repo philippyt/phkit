@@ -6,7 +6,7 @@ never configure git user, email, or authorship. never add `Co-Authored-By` trail
 
 when finished with changes, provide:
 1. files to stage (listed individually)
-2. commit message (`type: lowercase description`, 72 char max, no trailing period)
+2. commit message (`type: lowercase description`, no trailing period)
 3. whether to tag (`vMAJOR.MINOR.PATCH`)
 4. for large diffs (300+ lines), a concise, factual PR description drafted from the diff so the user can review and edit rather than write it from scratch
 
